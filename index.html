@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Orar D-2.2 · CTI</title>
+
+<meta name="theme-color" content="#0E1420">
+<meta name="color-scheme" content="dark">
+<link rel="manifest" href="manifest.webmanifest">
+
+<!-- iPhone: aplicație pe tot ecranul, fără bara Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Orar">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">CTI-română · Anul I · Seria D · subgrupa 2.2</div>
+    <h1>Orarul tău</h1>
+    <div class="sub">Sem. I, 2026/2027 — structură pe zile, fără calcul de săptămâni</div>
+  </header>
+
+  <div class="week-badge">
+    <div class="week-stepper">
+      <button id="weekPrev" aria-label="săptămâna anterioară">‹</button>
+      <div class="num" id="weekNum">—</div>
+      <button id="weekNext" aria-label="săptămâna următoare">›</button>
+    </div>
+    <div class="txt" id="weekTxt">se calculează...</div>
+  </div>
+
+  <nav class="days" id="dayNav"></nav>
+
+  <div id="panels"></div>
+
+  <footer>
+    <div><span class="tag opt" style="margin-left:0;">opt</span> = facultativ · <span class="tag wk" style="margin-left:2px;">I</span>/<span class="tag wk">P</span> = doar săpt. impare/pare</div>
+    <div style="margin-top:8px;">Vineri 8–10, sala A109 — Utilizarea Instrumentelor de IA (M. Pop), facultativ.</div>
+    <div class="ver" id="verLine"></div>
+  </footer>
+
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

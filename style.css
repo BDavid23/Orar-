@@ -1,0 +1,153 @@
+/* Layout: o singură coloană, taburi de zile sus, un panou cu blocuri orare pe zi. Doar temă întunecată. */
+:root{
+  --bg: #0E1420;
+  --panel: #171F30;
+  --panel-2: #1D2638;
+  --line: #2A3650;
+  --text: #E7EAF2;
+  --text-dim: #8C97AD;
+  --accent: #F2B155;
+  --accent-dim: #5A4A2E;
+  --cyan: #5EC8D8;
+  --free: #3A4358;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+*{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html{
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+body{
+  margin:0; min-height:100vh; background:var(--bg); color:var(--text);
+  font-family:var(--font-body); font-size:14px;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; }
+[hidden]{ display:none !important; }
+button{ touch-action: manipulation; }
+
+.wrap{
+  max-width: 720px; margin: 0 auto;
+  padding: calc(28px + env(safe-area-inset-top, 0px)) 18px calc(60px + env(safe-area-inset-bottom, 0px));
+  padding-left: calc(18px + env(safe-area-inset-left, 0px));
+  padding-right: calc(18px + env(safe-area-inset-right, 0px));
+}
+
+header{ margin-bottom: 22px; }
+.eyebrow{
+  font-family:var(--font-mono); font-size: 12.5px; color: var(--cyan);
+  letter-spacing: 0.02em; margin-bottom: 6px;
+}
+h1{ font-size: 26px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.01em; text-wrap: balance; }
+.sub{ color: var(--text-dim); font-size: 14.5px; }
+
+.week-badge{
+  margin-top: 18px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; padding: 14px 16px; display:flex; align-items:center; gap:12px;
+}
+.week-stepper{ display:flex; align-items:center; gap:4px; flex-shrink:0; }
+.week-stepper button{
+  width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--line);
+  background: var(--panel-2); color: var(--text); font-family:var(--font-mono);
+  font-size: 16px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition: background .15s, opacity .15s;
+}
+.week-stepper button:hover:not(:disabled){ background: var(--line); }
+.week-stepper button:disabled{ opacity:.3; cursor:default; }
+.week-badge .num{
+  font-family:var(--font-mono); font-weight:700; font-size: 20px;
+  color: var(--accent); background: var(--accent-dim); border-radius: 8px;
+  padding: 4px 10px; flex-shrink:0; min-width: 34px; text-align:center;
+}
+.week-badge .txt{ font-size: 13.5px; color: var(--text-dim); line-height:1.45; min-width:0; }
+.week-badge .txt b{ color: var(--text); font-weight:600; }
+.reset-week{
+  font-family:var(--font-mono); font-size: 11.5px; color: var(--cyan);
+  background:none; border:none; cursor:pointer; padding: 6px 0; margin-left: 4px;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.preview-tag{
+  font-family:var(--font-mono); font-size: 10px; color: var(--accent);
+  border: 1px solid var(--accent-dim); border-radius: 4px; padding: 1px 5px; margin-right:6px;
+}
+
+nav.days{
+  display:flex; gap:6px; margin: 22px 0 18px; overflow-x:auto;
+  border-bottom: 1px solid var(--line); padding-bottom: 1px;
+  scrollbar-width: none;
+}
+nav.days::-webkit-scrollbar{ display:none; }
+nav.days button{
+  font-family:var(--font-mono); font-size: 13px; font-weight:500;
+  background:none; border:none; color: var(--text-dim); padding: 10px 14px;
+  cursor:pointer; white-space:nowrap; border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+}
+nav.days button .date{ font-size: 10px; color: var(--text-dim); font-weight:400; opacity:.75; }
+nav.days button .dot{
+  display:inline-block; width:5px; height:5px; border-radius:50%;
+  background: var(--accent); margin-left:4px; vertical-align:middle; opacity:0;
+}
+nav.days button.today .dot{ opacity:1; }
+nav.days button.active{ color: var(--text); border-bottom-color: var(--cyan); }
+nav.days button:hover{ color: var(--text); }
+nav.days button:focus-visible, .week-stepper button:focus-visible, .reset-week:focus-visible{
+  outline: 2px solid var(--cyan); outline-offset: 2px;
+}
+
+.day-panel{ display:none; }
+.day-panel.active{ display:block; }
+
+.block{
+  display:flex; gap:14px; padding: 13px 4px; border-bottom: 1px solid var(--line);
+  border-radius: 8px; transition: background .2s;
+}
+.block:last-child{ border-bottom:none; }
+.block.now{ background: var(--panel-2); margin: 0 -8px; padding-left: 12px; padding-right: 8px; }
+.block.now .time{ color: var(--accent); font-weight:700; }
+.block.now .time .nowdot{
+  display:block; width:6px; height:6px; border-radius:50%; background: var(--accent);
+  margin-top:5px; box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.time{
+  font-family:var(--font-mono); font-size: 12.5px; color: var(--text-dim);
+  width: 64px; flex-shrink:0; padding-top: 2px; line-height:1.4;
+  font-variant-numeric: tabular-nums;
+}
+.content{ flex:1; min-width:0; }
+.course{ font-size: 15px; font-weight:600; line-height:1.35; }
+.meta{ font-size: 12.5px; color: var(--text-dim); margin-top: 3px; }
+.meta .room{ color: var(--cyan); font-family:var(--font-mono); }
+.tag{
+  display:inline-block; font-family:var(--font-mono); font-size: 10.5px;
+  padding: 1px 6px; border-radius: 4px; margin-left: 7px; vertical-align: 1px;
+}
+.tag.curs{ background:#2B3550; color:#9FB4E0; }
+.tag.sem{ background:#2E3A2A; color:#A8CC8C; }
+.tag.lab{ background:#3A2E2A; color:#E0A684; }
+.tag.opt{ background:#302A3D; color:#B79FD8; }
+.tag.sport{ background:#1E3A2E; color:#7FCBA0; }
+.tag.wk{ background:none; border:1px solid var(--line); color:var(--text-dim); font-size:9.5px; padding:0 4px; cursor:help; }
+
+.free .course{ color: var(--text-dim); font-weight:500; font-style:italic; }
+.course.dim{ color:var(--text-dim); font-weight:500; font-style:italic; }
+
+footer{
+  margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--line);
+  font-size: 12.5px; color: var(--text-dim); line-height:1.6;
+}
+footer .ver{ margin-top:10px; font-family:var(--font-mono); font-size:11px; opacity:.6; }
+
+@media (max-width: 420px){
+  .wrap{
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+    padding-left: calc(16px + env(safe-area-inset-left, 0px));
+    padding-right: calc(16px + env(safe-area-inset-right, 0px));
+  }
+  h1{ font-size: 22px; }
+}
