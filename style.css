@@ -134,6 +134,28 @@ nav.days button:focus-visible, .week-stepper button:focus-visible, .reset-week:f
 .tag.wk{ background:none; border:1px solid var(--line); color:var(--text-dim); font-size:9.5px; padding:0 4px; cursor:help; }
 
 .free .course{ color: var(--text-dim); font-weight:500; font-style:italic; }
+
+/* zi liberă legală */
+.holiday{
+  font-size: 12.5px; color: var(--accent); background: var(--accent-dim);
+  border-radius: 8px; padding: 9px 12px; margin-bottom: 8px; line-height:1.45;
+}
+nav.days button.holi .date{ color: var(--accent); opacity:1; }
+
+/* vacanță / sesiune: card în locul zilelor */
+.offnote{
+  margin-top: 22px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; padding: 18px 16px;
+}
+.offnote .off-title{ font-size: 18px; font-weight:700; margin-bottom: 6px; }
+.offnote .off-text{ font-size: 13.5px; color: var(--text-dim); line-height:1.5; }
+.offnote .jump{
+  margin-top: 14px; font-family:var(--font-mono); font-size: 12.5px; color: var(--cyan);
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px;
+  padding: 9px 12px; cursor:pointer; text-align:left;
+}
+.offnote .jump:hover{ background: var(--line); }
+.offnote .jump:focus-visible{ outline: 2px solid var(--cyan); outline-offset: 2px; }
 .course.dim{ color:var(--text-dim); font-weight:500; font-style:italic; }
 
 footer{

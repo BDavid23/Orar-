@@ -6,7 +6,7 @@
 //
 // Când adaugi fișiere noi sau vrei să forțezi o curățare, mărește numărul din CACHE.
 
-const CACHE = 'orar-v1';
+const CACHE = 'orar-v2';
 
 const CORE = [
   './',
